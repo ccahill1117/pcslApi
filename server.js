@@ -11,7 +11,7 @@ var corsOptions = {
 app.use(cors(corsOptions));
 
 const db = require("./app/models");
-db.sequelize.sync();
+// db.sequelize.sync();
 
 // parse requests of content-type - application/json
 app.use(bodyParser.json());
@@ -33,6 +33,8 @@ app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}.`);
 });
 
-db.sequelize.sync({ force: true }).then(() => {
-  console.log("Drop and re-sync db.");
-});
+// FIXME: fix these db.sequelize issues in server.js and elsewhere
+
+// db.sequelize.sync({ force: true }).then(() => {
+//   console.log("Drop and re-sync db.");
+// });
