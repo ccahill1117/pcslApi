@@ -1,17 +1,23 @@
 const db = require("../models");
 const User = db.users;
 const Op = db.Sequelize.Op;
+const Moment = require('moment')
 
 exports.create = (req, res) => {
-  if (!req.body.firstName) {
-    res.status(400).send({
-      message: "need to have a first name!"
-    });
-    return;
-  }
+  // if (!req.body.firstName) {
+  //   res.status(400).send({
+  //     message: "need to have a first name!"
+  //   });
+  //   return;
+  // }
   
   const user = {
-    firstName: req.body.firstName
+    firstName: req.body.firstName,
+    lastName: req.body.lastName,
+    email: req.body.email,
+    bio: req.body.bio,
+    createdAt: Moment().format(),
+    updatedAt: Moment().format()
   }
 
   User.create(user)
@@ -21,7 +27,7 @@ exports.create = (req, res) => {
     .catch(err => {
       res.status(500).send({
         message: 
-          err.message || "Some error occured while creating the tutorial."
+          err.message || "Some error occured while creating the user."
       })
     })
 };

@@ -1,8 +1,11 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require("cors");
+const logger = require('morgan');
 
 const app = express();
+
+app.use(logger('dev'));
 
 var corsOptions = {
   origin: "http://localhost:8081"
@@ -10,7 +13,7 @@ var corsOptions = {
 
 app.use(cors(corsOptions));
 
-const db = require("./app/models");
+const db = require("./bin/models");
 // db.sequelize.sync();
 
 // parse requests of content-type - application/json
@@ -21,17 +24,19 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 // simple route
 app.get("/", (req, res) => {
-  res.json({ message: "Welcome to the Portland City Squash League" });
+  res.json({ message: "Welcome to the Portland City Squash League test" });
 });
 
 // set port, listen for requests
 const PORT = process.env.PORT || 8080;
 
-require("./app/routes/user.routes")(app);
+require("./bin/routes/user.routes")(app);
 
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}.`);
 });
+
+module.exports = app;
 
 // FIXME: fix these db.sequelize issues in server.js and elsewhere
 
