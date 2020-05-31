@@ -2,6 +2,7 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require("cors");
 const logger = require('morgan');
+const models = require("./bin/models");
 
 const app = express();
 
@@ -14,7 +15,7 @@ var corsOptions = {
 app.use(cors(corsOptions));
 
 const db = require("./bin/models");
-// db.sequelize.sync();
+db.sequelize.sync()
 
 // parse requests of content-type - application/json
 app.use(bodyParser.json());
@@ -27,6 +28,14 @@ app.get("/", (req, res) => {
   res.json({ message: "Welcome to the Portland City Squash League test" });
 });
 
+app.get("/test", function(req, res) {
+  models.User.findAll().then(function(users) {
+    res.json(users);
+  });
+});
+
+
+
 // set port, listen for requests
 const PORT = process.env.PORT || 8080;
 
@@ -37,9 +46,3 @@ app.listen(PORT, () => {
 });
 
 module.exports = app;
-
-// FIXME: fix these db.sequelize issues in server.js and elsewhere
-
-// db.sequelize.sync({ force: true }).then(() => {
-//   console.log("Drop and re-sync db.");
-// });
