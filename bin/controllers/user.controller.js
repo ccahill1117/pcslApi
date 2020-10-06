@@ -1,11 +1,10 @@
 const db = require("../models");
 const User = db.users;
-const Op = db.Sequelize.Op;
 const Moment = require('moment')
 
 exports.create = (req, res) => {
 
-  
+
   const user = {
     firstName: req.body.firstName,
     lastName: req.body.lastName,
@@ -21,14 +20,14 @@ exports.create = (req, res) => {
     })
     .catch(err => {
       res.status(500).send({
-        message: 
+        message:
           err.message || "Some error occured while creating the user."
       })
     })
 };
 
 exports.findAll = (req, res) => {
-  
+
   User.findAll()
     .then(data => {
       res.send(data);
@@ -42,21 +41,21 @@ exports.findAll = (req, res) => {
 };
 
 exports.findOne = (req, res) => {
-  
+
 };
 
 exports.update = (req, res) => {
-  
+
 };
 
 exports.delete = (req, res) => {
-  
+
 };
 
 exports.deleteAll = (req, res) => {
-  
+
 };
 
 exports.findAllPublished = (req, res) => {
-  
+
 };
