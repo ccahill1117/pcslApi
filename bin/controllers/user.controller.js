@@ -5,7 +5,7 @@ const Op = db.Sequelize.Op;
 // Create and Save a new User
 exports.create = (req, res) => {
   // Validate request
-  if (!req.body.firstName || !req.body.lastName || !req.body.email) {
+  if (!req.body.firstName) {
     res.status(400).send({
       message: "Content can not be empty!"
     });
@@ -16,7 +16,8 @@ exports.create = (req, res) => {
   const user = {
     firstName: req.body.firstName,
     lastName: req.body.lastName,
-    email: req.body.email
+    email: req.body.email,
+    active: req.body.active
   };
 
   // Save User in the database
