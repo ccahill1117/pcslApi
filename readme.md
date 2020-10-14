@@ -2,4 +2,4 @@
 
 * development
   * cd pcslApi
-  * to run and watch - $ npm run watch:dev
+  * to run and watch - $ npm run start:dev
