@@ -1,5 +1,5 @@
 const db = require("../models");
-const User = db.user;
+const User = db.users;
 const Op = db.Sequelize.Op;
 
 // Create and Save a new User
@@ -12,7 +12,7 @@ exports.create = (req, res) => {
     return;
   }
 
-  // Create a User
+  // Create a user
   const user = {
     firstName: req.body.firstName,
     lastName: req.body.lastName
@@ -26,7 +26,7 @@ exports.create = (req, res) => {
     .catch(err => {
       res.status(500).send({
         message:
-          err.message || "Some error occurred while creating the User."
+          err.message || "Some error occurred while creating the user."
       });
     });
 };
