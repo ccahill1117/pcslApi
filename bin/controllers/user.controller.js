@@ -15,13 +15,11 @@ exports.create = (req, res) => {
   // Create a User
   const user = {
     firstName: req.body.firstName,
-    lastName: req.body.lastName,
-    email: req.body.email,
-    active: req.body.active
+    lastName: req.body.lastName
   };
 
   // Save User in the database
-  Tutorial.create(tutorial)
+  User.create(user)
     .then(data => {
       res.send(data);
     })

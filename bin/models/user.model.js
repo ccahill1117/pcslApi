@@ -5,13 +5,13 @@ module.exports = (sequelize, Sequelize) => {
     },
     lastName: {
       type: Sequelize.STRING
-    },
-    email: {
-      type: Sequelize.STRING
-    },
-    active: {
-      type: Sequelize.BOOLEAN
     }
+    // email: {
+    //   type: Sequelize.STRING
+    // },
+    // active: {
+    //   type: Sequelize.BOOLEAN
+    // }
   });
 
   return User;
