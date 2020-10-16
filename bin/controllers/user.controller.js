@@ -1,11 +1,11 @@
 const db = require("../models");
-const User = db.users;
+const User = db.user;
 const Op = db.Sequelize.Op;
 
 // Create and Save a new User
 exports.create = (req, res) => {
   // Validate request
-  if (!req.body.firstName) {
+  if (!req.body.username) {
     res.status(400).send({
       message: "Content can not be empty!"
     });
@@ -14,8 +14,9 @@ exports.create = (req, res) => {
 
   // Create a user
   const user = {
-    firstName: req.body.firstName,
-    lastName: req.body.lastName
+    username: req.body.username,
+    email: req.body.email,
+    password: req.body.password
   };
 
   // Save User in the database
@@ -33,8 +34,8 @@ exports.create = (req, res) => {
 
 // Retrieve all Users from the database.
 exports.findAll = (req, res) => {
-  const firstName = req.query.firstName;
-  var condition = firstName ? { firstName: { [Op.iLike]: `%${firstName}%` } } : null;
+  const username = req.query.username;
+  var condition = username ? { username: { [Op.iLike]: `%${username}%` } } : null;
 
   User.findAll({ where: condition })
     .then(data => {
@@ -142,4 +143,20 @@ exports.findAllActive = (req, res) => {
           err.message || "Some error occurred while retrieving Users."
       });
     });
+};
+
+exports.allAccess = (req, res) => {
+  res.status(200).send("Public Content.");
+};
+
+exports.userBoard = (req, res) => {
+  res.status(200).send("User Content.");
+};
+
+exports.adminBoard = (req, res) => {
+  res.status(200).send("Admin Content.");
+};
+
+exports.moderatorBoard = (req, res) => {
+  res.status(200).send("Moderator Content.");
 };

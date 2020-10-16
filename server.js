@@ -5,12 +5,32 @@ const cors = require("cors");
 const app = express();
 
 const db = require("./bin/models");
+const Role = db.role;
 // db.sequelize.sync({ force: true }).then(() => {
 //   console.log("Drop and re-sync db.");
+//   initial();
 // });
 db.sequelize.sync().then(() => {
   console.log("resync db");
+  initial();
 });
+
+function initial() {
+  Role.create({
+    id: 1,
+    name: "user"
+  });
+
+  Role.create({
+    id: 2,
+    name: "moderator"
+  });
+
+  Role.create({
+    id: 3,
+    name: "admin"
+  });
+}
 
 var corsOptions = {
   origin: "http://localhost:8081"
@@ -31,6 +51,7 @@ app.get("/", (req, res) => {
 
 require("./bin/routes/tutorial.routes")(app);
 require("./bin/routes/user.routes")(app);
+require("./bin/routes/auth.routes")(app);
 
 
 // set port, listen for requests
