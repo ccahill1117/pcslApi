@@ -11,8 +11,8 @@ const Role = db.role;
 //   initial();
 // });
 db.sequelize.sync().then(() => {
-  console.log("resync db");
-  initial();
+  console.log("resync db ctc");
+  // initial();
 });
 
 function initial() {
